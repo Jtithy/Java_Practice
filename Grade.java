@@ -6,7 +6,7 @@ public class Grade {
         char score = 'B';
         // Encrypt the grade
         score = (char) (score + 8);
-        //
+        //Decrypt the grade
         score = (char) (score - 8);
         System.out.println("Score:" + score);
     }
