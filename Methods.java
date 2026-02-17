@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 public class Methods {
 
     static int logic1(int x, int y) {
@@ -12,8 +14,13 @@ public class Methods {
     }
 
     public static void main(String[] args) {
-        int a = 10;
-        int b = 5;
+        System.out.println("Enter the values: ");
+        int a;
+        int b;
+        try (Scanner sc = new Scanner(System.in)) {
+            a = sc.nextInt();
+            b = sc.nextInt();
+        }
         int c;
         c = logic1(a, b);
         System.out.println(c);
