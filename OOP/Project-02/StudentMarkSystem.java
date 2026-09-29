@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+
 abstract class StudentMarkSystem {
 
     void showMessage() {
@@ -10,7 +12,7 @@ abstract class StudentMarkSystem {
 
     public abstract void removeStudent(String studentId);
 
-    public abstract void displayStudents();
+    public abstract void displayStudentById(String studentId);
 
     //Abstract methods for marks
     public abstract void addMark(String studentId, String subject, double mark);
@@ -73,5 +75,51 @@ class Student {
         System.out.println("Student Name: " + sName);
         System.out.println("Batch: " + batch);
         System.out.println("Department: " + department);
+    }
+}
+
+class StudentManagement extends StudentMarkSystem {
+
+    //Student array
+    private final ArrayList<Student> students = new ArrayList<>();
+
+    @Override
+    // For adding a student 
+    public void addStudent(Student student) {
+        students.add(student);
+        System.out.println("Added successfully: " + student.getsName());
+    }
+
+    @Override
+    //For deleting a student
+    public void removeStudent(String studentId) {
+        for (Student student : students) {
+            if (student.getStudentId().equals(studentId)) {
+                students.remove(student);
+                System.out.println("Removed successfully: " + student.getsName());
+                return;
+            }
+        }
+        System.out.println("Student with ID " + studentId + " not found.");
+    }
+
+    @Override
+    //For displaying student information
+    public void displayStudentById(String studentId) {
+
+        if (students.isEmpty()) {
+            System.out.println("No students found.");
+            return;
+        }
+
+        for (Student student : students) {
+
+            if (student.getStudentId().equals(studentId)) {
+                student.displayStudentInfo();
+                return;
+            }
+        }
+
+        System.out.println("Student with ID " + studentId + " not found.");
     }
 }
