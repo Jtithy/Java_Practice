@@ -113,59 +113,184 @@ class Tester extends Employee {
 public class EmployeeManagementSystem {
 
     public static void main(String[] args) {
+
         try (Scanner input = new Scanner(System.in)) {
+
             ArrayList<Employee> employees = new ArrayList<>();
 
-            System.out.println("Welcome to Employee Management System");
-            System.out.println("""
-                                       Enter Employee Type:
-                                       1.Manager
-                                       2.Designer
-                                       3.Developer
-                                       4.Testing""");
-            int choice = input.nextInt();
-            input.nextLine(); //Newline character
+            while (true) {
 
-            System.out.print("\nEnter Employee ID: ");
-            String employeeId = input.next();
-            input.nextLine(); //Newline character
+                System.out.println("\n===== Employee Management System =====");
+                System.out.println("1. Add Employee");
+                System.out.println("2. View Employee");
+                System.out.println("3. Remove Employee");
+                System.out.println("4. Exit");
+                System.out.print("Enter your choice: ");
 
-            System.out.print("\nENter Employee Name: ");
-            String employeeName = input.nextLine();
-            input.nextLine(); //Newline character
+                int menuChoice = input.nextInt();
+                input.nextLine();
 
-            System.out.print("\nEmployee Salary: ");
-            double employeeSalary = input.nextDouble();
-            input.nextLine(); //Newline character
+                switch (menuChoice) {
 
-            switch (choice) {
-                case 1 -> {
-                    System.out.println("Enter Manager Department: ");
-                    String department = input.nextLine();
-                    employees.add(new Manager(employeeId, employeeName, employeeSalary, department));
+                    // Add Employee
+                    case 1 -> {
+
+                        System.out.println("\n===== Add Employee =====");
+
+                        System.out.println("""
+                            Enter Employee Type:
+                            1. Manager
+                            2. Designer
+                            3. Developer
+                            4. Testing
+                            """);
+
+                        System.out.print("Enter Employee Type: ");
+                        int choice = input.nextInt();
+                        input.nextLine();
+
+                        System.out.print("Enter Employee ID: ");
+                        String employeeId = input.nextLine();
+
+                        System.out.print("Enter Employee Name: ");
+                        String employeeName = input.nextLine();
+
+                        System.out.print("Enter Employee Salary: ");
+                        double employeeSalary = input.nextDouble();
+                        input.nextLine();
+
+                        switch (choice) {
+
+                            case 1 -> {
+                                System.out.print("Enter Manager Department: ");
+                                String department = input.nextLine();
+
+                                employees.add(
+                                        new Manager(
+                                                employeeId,
+                                                employeeName,
+                                                employeeSalary,
+                                                department
+                                        )
+                                );
+
+                                System.out.println("Manager added successfully!");
+                            }
+
+                            case 2 -> {
+                                System.out.print("Enter Designer Tool: ");
+                                String designerTool = input.nextLine();
+
+                                employees.add(
+                                        new Designer(
+                                                employeeId,
+                                                employeeName,
+                                                employeeSalary,
+                                                designerTool
+                                        )
+                                );
+
+                                System.out.println("Designer added successfully!");
+                            }
+
+                            case 3 -> {
+                                System.out.print("Enter Developer Programming Language: ");
+                                String programmingLanguage = input.nextLine();
+
+                                employees.add(
+                                        new Developer(
+                                                employeeId,
+                                                employeeName,
+                                                employeeSalary,
+                                                programmingLanguage
+                                        )
+                                );
+
+                                System.out.println("Developer added successfully!");
+                            }
+
+                            case 4 -> {
+                                System.out.print("Enter Tester Tool: ");
+                                String testingTool = input.nextLine();
+
+                                employees.add(
+                                        new Tester(
+                                                employeeId,
+                                                employeeName,
+                                                employeeSalary,
+                                                testingTool
+                                        )
+                                );
+
+                                System.out.println("Tester added successfully!");
+                            }
+
+                            default ->
+                                System.out.println("Invalid Employee Type!");
+                        }
+                    }
+
+                    // View Employee
+                    case 2 -> {
+
+                        System.out.println("\n===== Employee Information =====");
+
+                        if (employees.isEmpty()) {
+                            System.out.println("No employees found.");
+                        } else {
+
+                            for (Employee employee : employees) {
+                                employee.displayEmployeeDetails();
+                                System.out.println("----------------------------");
+                            }
+                        }
+                    }
+
+                    // Remove Employee
+                    case 3 -> {
+
+                        System.out.println("\n===== Remove Employee =====");
+
+                        if (employees.isEmpty()) {
+                            System.out.println("No employees available to remove.");
+                        } else {
+
+                            System.out.print("Enter Employee ID to remove: ");
+                            String removeId = input.nextLine();
+
+                            boolean removed = false;
+
+                            for (int i = 0; i < employees.size(); i++) {
+
+                                if (employees.get(i).getEmployeeId().equals(removeId)) {
+
+                                    employees.remove(i);
+                                    removed = true;
+
+                                    System.out.println(
+                                            "Employee " + removeId + " removed successfully!"
+                                    );
+
+                                    break;
+                                }
+                            }
+
+                            if (!removed) {
+                                System.out.println("Employee ID not found.");
+                            }
+                        }
+                    }
+
+                    // Exit
+                    case 4 -> {
+
+                        System.out.println("\nThank you for using Employee Management System!");
+                        return;
+                    }
+
+                    default ->
+                        System.out.println("Invalid Choice!");
                 }
-                case 2 -> {
-                    System.out.println("Enter Designer Tool: ");
-                    String deginerTool = input.nextLine();
-                    employees.add(new Designer(employeeId, employeeName, employeeSalary, deginerTool));
-                }
-                case 3 -> {
-                    System.out.println("Enter Developer Programming Language: ");
-                    String programmingLanguage = input.nextLine();
-                    employees.add(new Developer(employeeId, employeeName, employeeSalary, programmingLanguage));
-                }
-                case 4 -> {
-                    System.out.println("Enter Tester Tool: ");
-                    String testingTool = input.nextLine();
-                    employees.add(new Tester(employeeId, employeeName, employeeSalary, testingTool));
-                }
-                default ->
-                    System.out.println("Invalid Choice");
-            }
-
-            System.out.println("Employee Information: ");
-            for (Employee employee : employees) {
-                employee.displayEmployeeDetails();
             }
         }
     }
