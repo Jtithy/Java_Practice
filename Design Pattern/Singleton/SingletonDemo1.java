@@ -18,7 +18,7 @@ class SingletonDemo {
     }
 }
 
-public class Main{
+public class SingletonDemo1{
     public static void main(String[] args) {
         //Available object
         SingletonDemo obj1 = SingletonDemo.getInstance();
