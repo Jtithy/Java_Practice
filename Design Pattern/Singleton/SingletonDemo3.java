@@ -1,6 +1,8 @@
+//Eager Singleton Implementation
+
 class Calculator{
     int a; int b;
-    private static Calculator obj;
+    private static Calculator obj = new Calculator();
 
     private Calculator(){
         System.out.println("Calcualtor for Summation.");

@@ -1,3 +1,5 @@
+//Lazy Singleton Implementation
+
 class Singleton{
     //private static instance
     private static Singleton instance = null;

@@ -1,3 +1,5 @@
+//Lazy Singleton Implementation
+
 class SingletonDemo {
     //private static instance
     private static SingletonDemo instance = null;
