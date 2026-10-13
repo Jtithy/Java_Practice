@@ -40,7 +40,7 @@ class PaymentFactory{
     }
 }
 
-public class FactoryDemo {
+public class FactoryDemo1 {
     public static void main(String[] args){
         Payment p1 = PaymentFactory.getPayment("Bkash");
         p1.pay();
