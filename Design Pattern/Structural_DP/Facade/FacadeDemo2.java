@@ -1,5 +1,6 @@
-//Facade Interface
+//Facade Design Pattern Using Interface
 
+//Facade Interface
 interface HomeTheaterFacadeInterface {
 
     void watchMovie(String movie);
